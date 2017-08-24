@@ -13,6 +13,7 @@
 		36324CEA1F4EE99E0032F503 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36324CE81F4EE99E0032F503 /* Main.storyboard */; };
 		36324CEC1F4EE99E0032F503 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36324CEB1F4EE99E0032F503 /* Assets.xcassets */; };
 		36324CEF1F4EE99E0032F503 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36324CED1F4EE99E0032F503 /* LaunchScreen.storyboard */; };
+		36324CF81F4EE9CF0032F503 /* CPRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 36324CF71F4EE9CF0032F503 /* CPRefreshControl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		36324CEB1F4EE99E0032F503 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36324CEE1F4EE99E0032F503 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		36324CF01F4EE99E0032F503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36324CF61F4EE9CF0032F503 /* CPRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRefreshControl.h; sourceTree = "<group>"; };
+		36324CF71F4EE9CF0032F503 /* CPRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRefreshControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +70,8 @@
 				36324CED1F4EE99E0032F503 /* LaunchScreen.storyboard */,
 				36324CF01F4EE99E0032F503 /* Info.plist */,
 				36324CDF1F4EE99D0032F503 /* Supporting Files */,
+				36324CF61F4EE9CF0032F503 /* CPRefreshControl.h */,
+				36324CF71F4EE9CF0032F503 /* CPRefreshControl.m */,
 			);
 			path = CPRefreshControl;
 			sourceTree = "<group>";
@@ -151,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36324CF81F4EE9CF0032F503 /* CPRefreshControl.m in Sources */,
 				36324CE71F4EE99E0032F503 /* ViewController.m in Sources */,
 				36324CE41F4EE99D0032F503 /* AppDelegate.m in Sources */,
 				36324CE11F4EE99D0032F503 /* main.m in Sources */,
@@ -277,6 +283,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4T54K95HB5;
 				INFOPLIST_FILE = CPRefreshControl/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.canpoyrazoglu.CPRefreshControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -289,6 +296,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4T54K95HB5;
 				INFOPLIST_FILE = CPRefreshControl/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.canpoyrazoglu.CPRefreshControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
