@@ -17,11 +17,11 @@
 
 /* Begin PBXFileReference section */
 		36324CDC1F4EE99D0032F503 /* CPRefreshControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPRefreshControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		36324CE01F4EE99D0032F503 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		36324CE21F4EE99D0032F503 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		36324CE31F4EE99D0032F503 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		36324CE51F4EE99E0032F503 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		36324CE61F4EE99E0032F503 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		36324CE01F4EE99D0032F503 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Exclude/main.m; sourceTree = "<group>"; };
+		36324CE21F4EE99D0032F503 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Exclude/AppDelegate.h; sourceTree = "<group>"; };
+		36324CE31F4EE99D0032F503 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Exclude/AppDelegate.m; sourceTree = "<group>"; };
+		36324CE51F4EE99E0032F503 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = Exclude/ViewController.h; sourceTree = "<group>"; };
+		36324CE61F4EE99E0032F503 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = Exclude/ViewController.m; sourceTree = "<group>"; };
 		36324CE91F4EE99E0032F503 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		36324CEE1F4EE99E0032F503 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		36324CF01F4EE99E0032F503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,16 +59,11 @@
 		36324CDE1F4EE99D0032F503 /* CPRefreshControl */ = {
 			isa = PBXGroup;
 			children = (
-				36324CE21F4EE99D0032F503 /* AppDelegate.h */,
-				36324CE31F4EE99D0032F503 /* AppDelegate.m */,
-				36324CE51F4EE99E0032F503 /* ViewController.h */,
-				36324CE61F4EE99E0032F503 /* ViewController.m */,
+				36324CF91F4F95FE0032F503 /* Classes */,
 				36324CE81F4EE99E0032F503 /* Main.storyboard */,
 				36324CED1F4EE99E0032F503 /* LaunchScreen.storyboard */,
 				36324CF01F4EE99E0032F503 /* Info.plist */,
 				36324CDF1F4EE99D0032F503 /* Supporting Files */,
-				36324CF61F4EE9CF0032F503 /* CPRefreshControl.h */,
-				36324CF71F4EE9CF0032F503 /* CPRefreshControl.m */,
 			);
 			path = CPRefreshControl;
 			sourceTree = "<group>";
@@ -76,9 +71,31 @@
 		36324CDF1F4EE99D0032F503 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				36324CE01F4EE99D0032F503 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		36324CF91F4F95FE0032F503 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				36324CFA1F4F96520032F503 /* Exclude */,
+				36324CF61F4EE9CF0032F503 /* CPRefreshControl.h */,
+				36324CF71F4EE9CF0032F503 /* CPRefreshControl.m */,
+			);
+			name = Classes;
+			path = ../Classes;
+			sourceTree = "<group>";
+		};
+		36324CFA1F4F96520032F503 /* Exclude */ = {
+			isa = PBXGroup;
+			children = (
+				36324CE21F4EE99D0032F503 /* AppDelegate.h */,
+				36324CE31F4EE99D0032F503 /* AppDelegate.m */,
+				36324CE51F4EE99E0032F503 /* ViewController.h */,
+				36324CE61F4EE99E0032F503 /* ViewController.m */,
+				36324CE01F4EE99D0032F503 /* main.m */,
+			);
+			name = Exclude;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
