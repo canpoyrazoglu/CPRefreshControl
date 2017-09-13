@@ -87,6 +87,7 @@
 -(void)drawInRect:(CGRect)rect withTickCount:(int)tickCount withTickColor:(UIColor*)tickColor withTickWidth:(float)width withTickLength:(float)length withValue:(float)value{
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextSetShouldAntialias(ctx, true);
+    CGContextSetLineCap(ctx, kCGLineCapRound);
     CGContextSetFillColorWithColor(ctx, tickColor.CGColor);
     CGContextSetStrokeColorWithColor(ctx, tickColor.CGColor);
     CGContextSetLineWidth(ctx, width);

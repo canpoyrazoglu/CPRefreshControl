@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CPRefreshControl"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "A customizable, UIView based refresh control to be used in conjugation with table views, collection views, or just about anything."
 
   # This description is used to generate tags and improve search results.
@@ -51,10 +51,10 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "Can Poyrazoğlu" => "email@address.com" }
+  s.author             = { "Can Poyrazoğlu" => "can@canpoyrazoglu.com" }
   # Or just: s.author    = "Can Poyrazoğlu"
   # s.authors            = { "Can Poyrazoğlu" => "email@address.com" }
-  # s.social_media_url   = "http://twitter.com/Can Poyrazoğlu"
+  s.social_media_url   = "http://twitter.com/canpoyrazoglu"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -62,8 +62,7 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  # s.platform     = :ios
-  # s.platform     = :ios, "5.0"
+  s.platform     = :ios, "6.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -78,7 +77,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/canpoyrazoglu/CPRefreshControl.git", :commit => "3233ff67b699d3cf878df897ef3d71a167ce45bd" }
+  s.source       = { :git => "https://github.com/canpoyrazoglu/CPRefreshControl.git", :commit => "497f143cb9818a82b27f0189fc4211e036b5fc63" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
