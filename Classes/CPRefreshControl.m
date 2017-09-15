@@ -30,6 +30,10 @@
     }
 }
 
+-(BOOL)isAnimating{
+    return animating;
+}
+
 - (instancetype)init
 {
     self = [super init];
@@ -60,6 +64,7 @@
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
+    rect = CGRectInset(rect, 2, 2);
     [self drawInRect:rect withTickCount:self.tickCount withTickColor:self.color withTickWidth:self.tickWidth withTickLength:self.tickLength withValue:self.value];
 
 }

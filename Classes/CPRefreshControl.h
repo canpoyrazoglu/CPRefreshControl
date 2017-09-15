@@ -35,6 +35,9 @@ IB_DESIGNABLE
 -(void)beginAnimating;
 -(void)endAnimating;
 
+/// Whether the control is currently animating or not.
+@property(nonatomic, readonly) BOOL isAnimating;
+
 /// Determines whether the animation should end immediately or with a smooth scale down animation
 @property IBInspectable BOOL shouldSkipEndingAnimation;
 
