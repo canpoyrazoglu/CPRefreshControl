@@ -77,7 +77,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/canpoyrazoglu/CPRefreshControl.git", :commit => "d2e14a2c44e014cf8b3828ec71a1f8b09671a240" }
+  s.source       = { :git => "https://github.com/canpoyrazoglu/CPRefreshControl.git", :tag => 'v0.0.4' }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
