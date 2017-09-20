@@ -16,15 +16,15 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CPRefreshControl"
-  s.version      = "0.0.2"
-  s.summary      = "A customizable, UIView based refresh control to be used in conjugation with table views, collection views, or just about anything."
+  s.version      = "0.0.4"
+  s.summary      = "A customizable refresh control based on UIView."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = "A customizable refresh control based on UIView."
+  s.description  = "A customizable, UIView based refresh control to be used in conjugation with table views, collection views, or just about anything."
 
   s.homepage     = "https://github.com/canpoyrazoglu/CPRefreshControl"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -77,7 +77,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/canpoyrazoglu/CPRefreshControl.git", :commit => "90357cdc8a409d015f5eae8dcb1d5aeda9d16862" }
+  s.source       = { :git => "https://github.com/canpoyrazoglu/CPRefreshControl.git", :commit => "d2e14a2c44e014cf8b3828ec71a1f8b09671a240" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

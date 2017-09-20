@@ -145,17 +145,18 @@
 
 -(void)endAnimating{
     [self.layer removeAllAnimations];
-    animating = NO;
     if(!self.shouldSkipEndingAnimation){
         [UIView animateWithDuration:0.2 animations:^{
             self.transform = CGAffineTransformMakeScale(0.1, 0.1);
             self.alpha = 0;
         } completion:^(BOOL finished) {
+            animating = NO;
             self.value = 0;
             self.alpha = 1;
             self.transform = CGAffineTransformIdentity;
         }];
     }else{
+        animating = NO;
         self.value = 0;
     }
 }
