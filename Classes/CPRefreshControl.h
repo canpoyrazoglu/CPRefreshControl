@@ -41,4 +41,10 @@ IB_DESIGNABLE
 /// Determines whether the animation should end immediately or with a smooth scale down animation
 @property IBInspectable BOOL shouldSkipEndingAnimation;
 
+/// Determines whether the control should perform the rotation animation smoothly (continuous rotation) instead of the default "stop motion" rotation behavior.
+@property IBInspectable BOOL shouldAnimateSmoothly;
+
+/// The alpha multiplier applied to each tick's color (based on previous tick's color) when animating. Default is 0.85, meaning each consequent tick's alpha is multiplied by 0.85 of previous tick when animating. Set to 1 to disable color fade effect on consequent ticks.
+@property IBInspectable float animatingTickAlphaBias;
+
 @end
