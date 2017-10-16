@@ -147,12 +147,16 @@
 }
 
 -(void)beginDiscreteAnimation{
-    [UIView animateWithDuration:0.25 animations:^{
-        self.transform = CGAffineTransformMakeScale(1.2, 1.2);
-        self.transform = CGAffineTransformRotate(self.transform, M_PI);
+    const float scaleAmount = 1.16;
+    const float rotationAmount = M_PI / 4;
+    const float animationDuration = 0.3;
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.transform = CGAffineTransformMakeScale(scaleAmount, scaleAmount);
+        self.transform = CGAffineTransformRotate(self.transform, rotationAmount);
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.25 animations:^{
-            self.transform = CGAffineTransformIdentity;
+        [UIView animateWithDuration:animationDuration animations:^{
+            self.transform = CGAffineTransformScale(self.transform, 1.0 / scaleAmount, 1.0 / scaleAmount);
+            self.transform = CGAffineTransformRotate(self.transform, rotationAmount);
         } completion:^(BOOL finished) {
             [self stepDiscreteAnimation];
         }];
