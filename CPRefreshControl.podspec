@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "6.0"
 
 
-  s.source       = { :git => "https://github.com/canpoyrazoglu/CPRefreshControl.git", :tag => 'v0.0.6' }
+  s.source       = { :git => "https://github.com/canpoyrazoglu/CPRefreshControl.git", :tag => 'v0.0.7' }
 
 
   s.source_files  = "Classes", "Classes/**/*.{h,m}"
