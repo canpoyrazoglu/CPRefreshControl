@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^CPRefreshControlAction)();
+typedef void (^CPRefreshControlAction)(void);
 
 IB_DESIGNABLE
 @interface CPRefreshControl : UIView
