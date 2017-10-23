@@ -11,6 +11,7 @@
 
 @implementation CPRefreshControl{
     BOOL animating;
+    BOOL endingAnimation;
 }
 
 -(void)setup{
@@ -191,6 +192,10 @@
 }
 
 -(void)endAnimating{
+    if(endingAnimation){
+        return;
+    }
+    endingAnimation = YES;
     [self.layer removeAllAnimations];
     if(!self.shouldSkipEndingAnimation){
         [UIView animateWithDuration:0.2 animations:^{
@@ -201,6 +206,9 @@
             self.value = 0;
             self.alpha = 1;
             self.transform = CGAffineTransformIdentity;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                endingAnimation = NO;
+            });
         }];
     }else{
         animating = NO;
