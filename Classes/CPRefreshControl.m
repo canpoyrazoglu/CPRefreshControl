@@ -7,11 +7,18 @@
 //
 
 #import "CPRefreshControl.h"
-#import <AudioToolbox/AudioToolbox.h>
+
+@interface CPRefreshControl()
+
+@property(nonatomic) float alphaBiasMultiplicationFactor;
+@property(readonly, nonatomic) float tickAlphaMultiplierForCurrentState;
+
+@end
 
 @implementation CPRefreshControl{
     BOOL animating;
     BOOL endingAnimation;
+    UIImpactFeedbackGenerator *feedbackGenerator;
 }
 
 -(void)setup{
@@ -31,7 +38,7 @@
         self.tickLength = 0.5;
     }
     if(!self.animatingTickAlphaBias){
-        self.animatingTickAlphaBias = 0.85;
+        self.animatingTickAlphaBias = 0.88;
     }
 }
 
@@ -70,8 +77,16 @@
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     rect = CGRectInset(rect, 2, 2);
-    [self drawInRect:rect withTickCount:self.tickCount withTickColor:self.color withTickWidth:self.tickWidth withTickLength:self.tickLength withValue:self.value withTickAlphaMultiplier:animating ? self.animatingTickAlphaBias : 1];
+    [self drawInRect:rect withTickCount:self.tickCount withTickColor:self.color withTickWidth:self.tickWidth withTickLength:self.tickLength withValue:self.value withTickAlphaMultiplier:self.tickAlphaMultiplierForCurrentState];
     
+}
+
+-(float)tickAlphaMultiplierForCurrentState{
+    if(animating){
+        return (self.animatingTickAlphaBias * self.alphaBiasMultiplicationFactor) + (1 - self.alphaBiasMultiplicationFactor);
+    }else{
+        return 1;
+    }
 }
 
 -(CGPoint)centerInRect:(CGRect)rect{
@@ -147,22 +162,71 @@
     [CATransaction commit];
 }
 
+-(void)animateToScaleAndBack:(float)scale duration:(float)duration{
+    [CATransaction begin];
+    CABasicAnimation* scaleAnimation = [CABasicAnimation
+                                        animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    scaleAnimation.fromValue = @(1);
+    scaleAnimation.toValue = @(scale);
+    scaleAnimation.duration = duration * 0.35;
+    [self.layer addAnimation:scaleAnimation forKey:@"scaleAnimation"];
+    [CATransaction setCompletionBlock:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [CATransaction begin];
+            CABasicAnimation* scaleBackAnimation = [CABasicAnimation
+                                                    animationWithKeyPath:@"transform.scale"];
+            scaleBackAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+            scaleBackAnimation.fromValue = @(scale);
+            scaleBackAnimation.toValue = @(1);
+            scaleBackAnimation.duration = duration * 0.65;
+            [self.layer addAnimation:scaleBackAnimation forKey:@"scaleBackAnimation"];
+            [CATransaction setCompletionBlock:^{
+                
+            }];
+            [CATransaction commit];
+        });
+    }];
+    [CATransaction commit];
+}
+
+-(void)stepMultiplicationFactor{
+    self.alphaBiasMultiplicationFactor += 0.075;
+    if(self.alphaBiasMultiplicationFactor > 1){
+        self.alphaBiasMultiplicationFactor = 1;
+    }else{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.03 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self stepMultiplicationFactor];
+        });
+        
+    }
+}
+
 -(void)beginDiscreteAnimation{
-    const float scaleAmount = 1.16;
-    const float rotationAmount = M_PI / 4;
-    const float animationDuration = 0.3;
-    [UIView animateWithDuration:animationDuration animations:^{
-        self.transform = CGAffineTransformMakeScale(scaleAmount, scaleAmount);
-        self.transform = CGAffineTransformRotate(self.transform, rotationAmount);
+    const float scaleAmount = 1.25;
+    const float rotationAmount = M_PI;
+    const float scaleAnimationDuration = 0.36;
+    const float rotationAnimationDuration = 0.9;
+    self.alphaBiasMultiplicationFactor = 0;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.32 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self stepMultiplicationFactor];
+    });
+    [self animateToScaleAndBack:scaleAmount duration:scaleAnimationDuration];
+    [UIView animateWithDuration:rotationAnimationDuration / 2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.transform = CGAffineTransformRotate(self.transform, rotationAmount / 2);
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:animationDuration animations:^{
-            self.transform = CGAffineTransformScale(self.transform, 1.0 / scaleAmount, 1.0 / scaleAmount);
-            self.transform = CGAffineTransformRotate(self.transform, rotationAmount);
+        [UIView animateWithDuration:rotationAnimationDuration / 2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.transform = CGAffineTransformRotate(self.transform, rotationAmount / 2);
         } completion:^(BOOL finished) {
             [self stepDiscreteAnimation];
         }];
     }];
     
+}
+
+-(void)setAlphaBiasMultiplicationFactor:(float)alphaBiasMultiplicationFactor{
+    _alphaBiasMultiplicationFactor = alphaBiasMultiplicationFactor;
+    [self setNeedsDisplay];
 }
 
 -(void)stepDiscreteAnimation{
@@ -181,6 +245,7 @@
         return;
     }
     animating = YES;
+    self.alphaBiasMultiplicationFactor = 1;
     _value = 1;
     if(self.shouldAnimateSmoothly){
         //smooth animation
@@ -200,6 +265,7 @@
     if(!self.shouldSkipEndingAnimation){
         [UIView animateWithDuration:0.2 animations:^{
             self.transform = CGAffineTransformMakeScale(0.1, 0.1);
+            self.transform = CGAffineTransformRotate(self.transform, M_PI);
             self.alpha = 0;
         } completion:^(BOOL finished) {
             animating = NO;
@@ -216,6 +282,11 @@
     }
 }
 
+-(void)setImpactStyle:(CPRefreshControlImpactStyle)impactStyle{
+    feedbackGenerator = nil;
+    _impactStyle = impactStyle;
+}
+
 -(void)setValue:(float)value{
     if(animating){
         return;
@@ -226,16 +297,28 @@
     [self setNeedsDisplay];
     if(shouldAnimate){
         if (@available(iOS 10,*)) {
-            static UIImpactFeedbackGenerator *feedbackGenerator;
-            static dispatch_once_t onceToken;
-            dispatch_once(&onceToken, ^{
-                feedbackGenerator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleLight];
-                [feedbackGenerator prepare];
-            });
-            [feedbackGenerator impactOccurred];
+            if(self.impactStyle != CPRefreshControlImpactStyleNone){
+                if(!feedbackGenerator){
+                    UIImpactFeedbackStyle feedbackStyle;
+                    if(self.impactStyle == CPRefreshControlImpactStyleLight){
+                        feedbackStyle = UIImpactFeedbackStyleLight;
+                    }else if(self.impactStyle == CPRefreshControlImpactStyleMedium){
+                        feedbackStyle = UIImpactFeedbackStyleMedium;
+                    }else{
+                        feedbackStyle = UIImpactFeedbackStyleHeavy;
+                    }
+                    feedbackGenerator = [[UIImpactFeedbackGenerator alloc] initWithStyle:feedbackStyle];
+                    [feedbackGenerator prepare];
+                }
+                [feedbackGenerator impactOccurred];
+            }
         }
         [self beginAnimating];
     }
+}
+
+-(CGSize)intrinsicContentSize{
+    return CGSizeMake(30, 30);
 }
 
 
