@@ -29,16 +29,19 @@
         self.tickCount = 12;
     }
     if(!self.animationSpeed){
-        self.animationSpeed = 6;
+        self.animationSpeed = 5.2;
     }
     if(!self.tickWidth){
-        self.tickWidth = 2;
+        self.tickWidth = 1.85;
     }
     if(!self.tickLength){
-        self.tickLength = 0.5;
+        self.tickLength = 0.45;
     }
     if(!self.animatingTickAlphaBias){
         self.animatingTickAlphaBias = 0.88;
+    }
+    if(!self.discreteAnimationBeginningScaleAmount){
+        self.discreteAnimationBeginningScaleAmount = 1.25;
     }
 }
 
@@ -169,7 +172,7 @@
     scaleAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     scaleAnimation.fromValue = @(1);
     scaleAnimation.toValue = @(scale);
-    scaleAnimation.duration = duration * 0.35;
+    scaleAnimation.duration = duration * 0.3;
     [self.layer addAnimation:scaleAnimation forKey:@"scaleAnimation"];
     [CATransaction setCompletionBlock:^{
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -179,7 +182,7 @@
             scaleBackAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
             scaleBackAnimation.fromValue = @(scale);
             scaleBackAnimation.toValue = @(1);
-            scaleBackAnimation.duration = duration * 0.65;
+            scaleBackAnimation.duration = duration * 0.7;
             [self.layer addAnimation:scaleBackAnimation forKey:@"scaleBackAnimation"];
             [CATransaction setCompletionBlock:^{
                 
@@ -191,7 +194,7 @@
 }
 
 -(void)stepMultiplicationFactor{
-    self.alphaBiasMultiplicationFactor += 0.075;
+    self.alphaBiasMultiplicationFactor += 0.085;
     if(self.alphaBiasMultiplicationFactor > 1){
         self.alphaBiasMultiplicationFactor = 1;
     }else{
@@ -203,15 +206,14 @@
 }
 
 -(void)beginDiscreteAnimation{
-    const float scaleAmount = 1.25;
     const float rotationAmount = M_PI;
-    const float scaleAnimationDuration = 0.36;
-    const float rotationAnimationDuration = 0.9;
+    const float scaleAnimationDuration = 0.3;
+    const float rotationAnimationDuration = 0.7;
     self.alphaBiasMultiplicationFactor = 0;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.32 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self stepMultiplicationFactor];
     });
-    [self animateToScaleAndBack:scaleAmount duration:scaleAnimationDuration];
+    [self animateToScaleAndBack:self.discreteAnimationBeginningScaleAmount duration:scaleAnimationDuration];
     [UIView animateWithDuration:rotationAnimationDuration / 2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.transform = CGAffineTransformRotate(self.transform, rotationAmount / 2);
     } completion:^(BOOL finished) {
