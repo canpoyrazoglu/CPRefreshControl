@@ -18,7 +18,10 @@
 @implementation CPRefreshControl{
     BOOL animating;
     BOOL endingAnimation;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability"
     UIImpactFeedbackGenerator *feedbackGenerator;
+#pragma clang diagnostic pop
 }
 
 -(void)setup{
